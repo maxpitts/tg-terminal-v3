@@ -1,0 +1,92 @@
+/* ── Bloomberg Terminal Design System ──────────────────────────────────── */
+:root {
+  --bb-bg:        #000000;
+  --bb-bg2:       #0a0a0a;
+  --bb-bg3:       #111111;
+  --bb-border:    #222222;
+  --bb-border2:   #333333;
+  --bb-orange:    #FF9500;
+  --bb-orange-bg: rgba(255,149,0,0.1);
+  --bb-white:     #F0F0F0;
+  --bb-gray1:     #888888;
+  --bb-gray2:     #444444;
+  --bb-green:     #00CC44;
+  --bb-red:       #FF3333;
+  --bb-cyan:      #00AAFF;
+  --bb-yellow:    #FFD700;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0; padding: 0;
+  background: var(--bb-bg);
+  color: var(--bb-white);
+  font-family: 'JetBrains Mono', monospace;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Bloomberg scrollbar */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: #000; }
+::-webkit-scrollbar-thumb { background: #333; }
+::-webkit-scrollbar-thumb:hover { background: #FF9500; }
+
+/* Selection */
+::selection { background: rgba(255,149,0,0.3); color: #fff; }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body { margin: 0; padding: 0; background: #07070f; }
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #07070f; }
+::-webkit-scrollbar-thumb { background: #1e1e35; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #2d2d4a; }
+
+/* Hide TradingView watermark */
+.tv-lightweight-charts table tr:last-child td:last-child > div {
+  display: none !important;
+}
+a[href*="tradingview"] {
+  display: none !important;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  /* Hide watchlist sidebar on mobile */
+  .watchlist-sidebar { display: none !important; }
+  /* Collapse right panel */
+  .right-panel { display: none !important; }
+  /* Full width chart */
+  .chart-grid { grid-template-columns: 1fr !important; }
+  /* Smaller indicator bar */
+  .indicator-bar { font-size: 10px !important; overflow-x: auto; }
+  /* Stack nav items */
+  .nav-links { display: none !important; }
+  /* Bigger touch targets */
+  button { min-height: 36px; }
+}
+@media (max-width: 480px) {
+  .tf-buttons span { display: none; }
+}
+
+/* Use dynamic viewport height to handle mobile browser chrome */
+.full-height { height: 100dvh; }
+
+/* Touch-friendly tap targets */
+@media (max-width: 768px) {
+  button, a { min-height: 36px; }
+  /* Prevent text size adjustment on orientation change */
+  html { -webkit-text-size-adjust: 100%; }
+  /* Smooth scrolling on iOS */
+  * { -webkit-overflow-scrolling: touch; }
+  /* Hide TV watermark smaller on mobile */
+  .tv-lightweight-charts { font-size: 0 !important; }
+  /* Prevent double-tap zoom on buttons */
+  button, a { touch-action: manipulation; }
+}
